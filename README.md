@@ -74,26 +74,10 @@ Blocks longer than a few lines appear collapsed on screen, as `…` above. The f
 
 ## How a run works
 
-```mermaid
-flowchart TD
-    REQ["/rearticulate fix the login bug"]
-
-    subgraph T["worked out in thinking, nothing on screen yet"]
-        direction TB
-        C1["1. classify<br/>request type, session model, target model,<br/>files named, steps with outside reach"]
-        C2["2. golden-rule pass<br/>what would a colleague with no context ask?<br/>answer it from the repo, not from the user"]
-        C3["3. compose<br/>fill the template in fixed tag order"]
-        C4["4. convert<br/>rewrite phrasing current models handle poorly"]
-        C1 --> C2 --> C3 --> C4
-    end
-
-    REQ --> C1
-    C4 --> SHOW["5. on screen: the prompt,<br/>plus target model, assumptions, changes"]
-    SHOW -->|"dry run"| HOLD["stops here.<br/>reply 'run it' to continue"]
-    SHOW --> RUN["6. execute<br/>independent tool calls batched,<br/>files read before claims about them,<br/>flagged steps wait for you"]
-    RUN --> CHK["7. verify<br/>run the checks it wrote,<br/>confirm the files touched match the task"]
-    CHK --> OUT["recap that reads on its own"]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/the-run-dark.svg">
+  <img alt="Seven numbered steps down a spine. Steps one to four sit inside a panel marked as happening in thinking: classify, golden-rule pass, compose, convert. A divider marked what you see precedes step five, the prompt on screen with its assumptions, where a dry run stops. Steps six and seven execute and verify, ending in a recap that reads on its own." src="diagrams/the-run-light.svg">
+</picture>
 
 Steps 1 through 4 cost you nothing to read, because they happen in thinking. Step 5 is the review point.
 
@@ -124,17 +108,10 @@ A skill that flattened those differences would hand the same prompt to each of t
 
 The substance of the prompt survives the move. The model-specific parts get re-derived rather than carried across, effort included.
 
-```mermaid
-flowchart TD
-    ASK["request arrives"] --> FLAG{"model flag given?"}
-    FLAG -->|"yes"| PROF["that profile"]
-    FLAG -->|"no"| NAMED{"a model named<br/>for the deliverable?"}
-    NAMED -->|"yes"| PROF
-    NAMED -->|"no"| SESS["the session model"]
-    PROF --> CONTENT["prompt content follows the target profile"]
-    SESS --> CONTENT
-    CONTENT --> BEHAV["narration, verification and delegation follow<br/>the model actually running the session"]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/target-model-dark.svg">
+  <img alt="Three precedence rows, first match wins: a model flag is passed, then a model is named for the deliverable, otherwise the model running the session. Below, two dimensions kept apart: what the prompt says follows the target profile, while how the session behaves follows the model actually running it." src="diagrams/target-model-light.svg">
+</picture>
 
 Those two dimensions stay separate on purpose. Authoring a prompt for Opus 5 from a Fable 5.1 session leaves the verification tag out of the deliverable while the session still runs its own checks.
 
@@ -193,16 +170,10 @@ Phrasing reaches the same place. "Just rewrite the prompt" or "show me the promp
 
 `SKILL.md` is 130 lines. The other 12,000 wait until a run reaches for them.
 
-```mermaid
-flowchart LR
-    SKILL["SKILL.md<br/>130 lines<br/>loaded when invoked"]
-    SKILL --> TPL["template<br/>370 lines<br/>read on each run"]
-    SKILL -.->|"two rows match, or<br/>an unusual signal fires"| TAX["request taxonomy<br/>326 lines"]
-    SKILL -.->|"grafting a block that is<br/>not in the template"| SNIP["snippet library<br/>1,303 lines"]
-    SKILL -.->|"a model is named or<br/>a model flag is passed"| MOD["model notes and<br/>the six profiles<br/>5,414 lines"]
-    SKILL -.->|"porting a prompt, or<br/>you ask why"| CAT["technique catalog<br/>3,610 lines"]
-    SKILL -.->|"no row fits"| EXM["worked examples<br/>877 lines"]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/context-dark.svg">
+  <img alt="SKILL.md at 130 lines is loaded when the skill is invoked, shown as a small bar. Six reference files open on stated triggers, with bars proportional to their length: the template at 370 lines, the model profiles at 5,414, the technique catalog at 3,610, the snippet library at 1,303, the worked examples at 877, and the request taxonomy at 326." src="diagrams/context-light.svg">
+</picture>
 
 That shape is deliberate. Claude Code holds an invoked skill in context and carries part of it through compaction, so the procedure belongs in the short file and the reference material belongs behind a trigger.
 
@@ -251,6 +222,8 @@ The procedure assumes Claude Code. The prompt-authoring path produces prompts fo
 ## Changing it
 
 The two files most worth editing are the request taxonomy, where a row describes a kind of request and what it needs, and the examples, which the skill pattern-matches against when no row fits. Both are plain Markdown.
+
+The diagrams are hand-authored SVG rather than output from a layout engine, built by `diagrams/build.py`. Edit that script and re-run it to regenerate the light and dark pair together, which keeps the two variants from drifting apart.
 
 If you add a rule, give it an identifier and a source. The audit trail is what makes the catalog useful rather than merely long. If you add a snippet, record which profiles should receive it and which should not, since a snippet measured on one model is not evidence about another.
 
