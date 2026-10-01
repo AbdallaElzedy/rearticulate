@@ -7,3 +7,6 @@ desktop.ini
 # Local working notes kept out of the repository
 *.local.md
 scratch/
+
+# The diagram generator stays local; the committed SVGs are the artifacts
+diagrams/build.py

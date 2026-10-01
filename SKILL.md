@@ -2,6 +2,9 @@
 name: rearticulate
 description: Rewrite a raw request into a best-practices prompt following Anthropic's prompting guide (clear and direct, context and motivation, role, XML structure, examples, positive format control, explicit action verbs, success criteria, self-check, parallel tool calls, scope control), show the rewritten prompt briefly, then execute it in the same turn. Use when the user invokes /rearticulate or asks to rearticulate, refine, or rewrite a request before doing it. Works with every current Claude model (Fable 5.1 and 5, Opus 5 and 4.8, Sonnet 5, and the 4.x family) and adapts the prompt to the target model.
 argument-hint: "[request to rearticulate and execute] [--model <alias>] [--dry-run]"
+metadata:
+  author: Abdalla Elzedy
+  role: Security Engineer
 ---
 
 # Rearticulate

@@ -219,15 +219,10 @@ On what it touches: the skill reads files and edits the workspace without stoppi
 
 The procedure assumes Claude Code. The prompt-authoring path produces prompts for the API, while the skill itself leans on Claude Code features, among them skill loading, `${CLAUDE_SKILL_DIR}` substitution, and the permission model.
 
-## Changing it
+## Author
 
-The two files most worth editing are the request taxonomy, where a row describes a kind of request and what it needs, and the examples, which the skill pattern-matches against when no row fits. Both are plain Markdown.
-
-The diagrams are hand-authored SVG rather than output from a layout engine, built by `diagrams/build.py`. Edit that script and re-run it to regenerate the light and dark pair together, which keeps the two variants from drifting apart.
-
-If you add a rule, give it an identifier and a source. The audit trail is what makes the catalog useful rather than merely long. If you add a snippet, record which profiles should receive it and which should not, since a snippet measured on one model is not evidence about another.
-
-Issues and pull requests are welcome, particularly from anyone who has run it against a model the profiles cover thinly.
+**Abdalla Elzedy**, Security Engineer  
+[@AbdallaElzedy](https://github.com/AbdallaElzedy)
 
 ## Licence
 
