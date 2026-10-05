@@ -7,7 +7,7 @@ How to read this file. Everything on the page is measured on Claude Opus 5; a ru
 ## Identity and API facts
 
 - Profile: `opus-5`. Aliases: opus-5, opus5, claude-opus-5. API string: `claude-opus-5` (BP-085; the guide's SDK samples pin this string and `max_tokens` explicitly, BP-059).
-- Covered set: inside the guide's eleven current models (BP-002); the guide's model table row is BP-017.
+- Covered set: inside the guide's thirteen current models (BP-002); the guide's model table row is BP-017.
 - Baseline: `opus-4-8`. Page basis: "It performs well out of the box on existing Claude Opus 4.8 prompts." (O5-05). Inherited from the Opus 4.8 profile unless a section of this page covers the same topic: code review coverage language (o48_review_coverage, o48_review_concrete_bar), frontend and design variety (frontend_aesthetics_short, o48_propose_directions, o48_aefrm_concrete_spec), literal instruction following and explicit scope (o48_explicit_scope), and the effort-sweep advice. Superseded by this page: verification, subagent delegation, response verbosity, agentic narration, self-correction, thinking-disabled behaviour. When a borrowed snippet is grafted, the Target model item records "text measured on Prompting Claude Opus 4.8".
 - Thinking: on by default when the `thinking` parameter is omitted (O5-60, BP-218). It can be disabled only at effort `high` or below (O5-06, O5-60, BP-219); the page does not print the disable syntax and routes it to the migration guide. Preferred setting when cost matters: thinking on at `low` effort, which "performs better than thinking disabled at similar cost" (O5-62, BP-227). With thinking disabled two artifacts can appear: tool calls written as text, and internal XML tags in the visible response (O5-61, O5-63, O5-65).
 - `budget_tokens`: not accepted; the guide states a 400 on Claude 4.7 and later (BP-189). Convert to adaptive thinking plus `output_config.effort` and record the change.
@@ -536,7 +536,7 @@ Guide rules naming Opus 5 (from Prompting best practices; catalog IDs, quoted fr
 
 ### BP-002 Opus 5 is inside the guide's covered set
 - Kind: fact
-- Rule: Treat the guide as authoritative for exactly these eleven current models and route any other model to the migration considerations.
+- Rule: Treat the guide as authoritative for exactly these thirteen current models and route any other model to the migration considerations.
 - Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
 - Applies when: Resolving whether guide techniques are measured on the target.
 - Skill applies it by: Opus 5 needs no analogy note; the guide applies directly.
@@ -586,35 +586,36 @@ Guide rules naming Opus 5 (from Prompting best practices; catalog IDs, quoted fr
 ### BP-081 Sample: model_identity
 - Kind: sample-prompt
 - Rule: Use this sentence pair to fix the assistant's identity.
-- Guide says: see snippet model_identity; the text is "The assistant is Claude, created by Anthropic. The current model is Claude Opus 5."
+- Note: the guide's illustrative model for this sample moved to Claude Opus 5.5 in the 2026-10-05 capture. The technique is unchanged, and the skill pins the target's own name and string either way (BP-059).
+- Guide says: see snippet model_identity; the text is "The assistant is Claude, created by Anthropic. The current model is Claude Opus 5.5."
 - Applies when: Authored application system prompts that need correct self-identification.
 - Skill applies it by: Grafts into `<role>` of the authored system prompt; the model name is Opus 5 only when Opus 5 is the target (BP-082).
 
 ### BP-082 Substitute the model that will actually run
 - Kind: model-note
 - Rule: Replace "Claude Opus 5" with the model that will actually run the prompt.
-- Guide says: "The current model is Claude Opus 5."
+- Guide says: "The current model is Claude Opus 5.5."
 - Applies when: Grafting either self-knowledge sample.
 - Skill applies it by: Reads the target from the raw request or the alias table; substitutes display name and exact string; records the substitution in the Target model item. For an Opus 5 target the guide's wording stands as printed.
 
 ### BP-084 Sample: model_string
 - Kind: sample-prompt
 - Rule: Use this wording to set the default model and its API string.
-- Guide says: see snippet model_string; opens "When an LLM is needed, please default to Claude Opus 5 unless the user requests otherwise. The exact model string for Claude Opus 5 is claude-opus-5."
+- Guide says: see snippet model_string; opens "When an LLM is needed, please default to Claude Opus 5.5 unless the user requests otherwise. The exact model string for Claude Opus 5.5 is claude-opus-5-5."
 - Applies when: System prompts for LLM-powered apps and coding assistants that generate SDK calls.
 - Skill applies it by: Grafts into the authored system prompt with the target substituted; keeps both halves (default and exact string).
 
 ### BP-085 The exact API string claude-opus-5
 - Kind: fact
 - Rule: Use claude-opus-5 as the exact API model string for Claude Opus 5.
-- Guide says: "The exact model string for Claude Opus 5 is claude-opus-5."
+- Guide says: "The exact model string for Claude Opus 5.5 is claude-opus-5-5."
 - Applies when: Generating or checking API calls that target Opus 5.
 - Skill applies it by: Section 2 records the string; user-pasted code with a different Opus 5 string is corrected and the change recorded.
 
 ### BP-086 Default model is overridable
 - Kind: technique
 - Rule: Make the default model overridable by explicit user request.
-- Guide says: "please default to Claude Opus 5 unless the user requests otherwise."
+- Guide says: "please default to Claude Opus 5.5 unless the user requests otherwise."
 - Applies when: Authoring default-model instructions for an application.
 - Skill applies it by: Phrases the default as a default in `<constraints>` so the assistant honours a user who names another model.
 

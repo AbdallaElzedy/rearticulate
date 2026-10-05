@@ -2,7 +2,7 @@
 
 Source: Prompting best practices, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
 Supplement: Prompting Claude Fable 5.1, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
-Snapshot date: 2026-09-08. Rebuild this file when either page changes.
+Snapshot date: 2026-09-08 (main guide re-captured 2026-10-05). Rebuild this file when either page changes.
 
 ## How to read this file
 
@@ -38,13 +38,13 @@ Anchor: page top. The description and the three-part organisation of the page.
 - Applies when: Any reference file cites a technique, or a reader needs to trace a skill rule back to Anthropic's guide.
 - Skill applies it by: The title and URL sit in the header of this file, of snippet-library.md, and in the SKILL.md References section. The five topics in the description (clarity, examples, XML structuring, thinking, agentic systems) are the minimum coverage checklist this catalog satisfies.
 
-### BP-002 The eleven covered models
+### BP-002 The thirteen covered models
 - Kind: fact
-- Rule: Treat the guide as authoritative for exactly these eleven current models and route any other model to the migration considerations.
-- Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
-- Measured on: the eleven listed models
+- Rule: Treat the guide as authoritative for exactly these thirteen current models and route any other model to the migration considerations.
+- Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
+- Measured on: the thirteen listed models
 - Applies when: Deciding whether the guide's techniques are measured on the executing model, or on a model the user names in a prompt-authoring request.
-- Skill applies it by: model-notes.md lists the eleven as the covered set. In Step 1, if the user names a model outside the set (Opus 4.5 or Sonnet 4.5, for example), the assumptions line says the guide is applied by analogy and Step 4 runs the migration checklist.
+- Skill applies it by: model-notes.md lists the thirteen as the covered set. In Step 1, if the user names a model outside the set (Opus 4.5 or Sonnet 4.5, for example), the assumptions line says the guide is applied by analogy and Step 4 runs the migration checklist.
 
 ### BP-003 Model guidance first
 - Kind: fact
@@ -714,7 +714,7 @@ Anchor: #model-self-knowledge
 ### BP-081 Model identity sentence
 - Kind: sample-prompt
 - Rule: Use this sentence pair to fix the assistant's identity.
-- Guide says: "The assistant is Claude, created by Anthropic. The current model is Claude Opus 5." (see snippet model_identity)
+- Guide says: "The assistant is Claude, created by Anthropic. The current model is Claude Opus 5.5." (see snippet model_identity)
 - Measured on: all current (sample names Opus 5)
 - Applies when: Application system prompts that need correct self-identification.
 - Skill applies it by: Graft verbatim into the authored system prompt with the actual model name substituted; the assistant never claims to be a different model or vendor.
@@ -723,7 +723,7 @@ Anchor: #model-self-knowledge
 ### BP-082 Substitute the real model
 - Kind: model-note
 - Rule: Replace "Claude Opus 5" with the model that will actually run the prompt.
-- Guide says: "The current model is Claude Opus 5."
+- Guide says: "The current model is Claude Opus 5.5."
 - Measured on: Opus 5 (sample), substituted per target
 - Applies when: Grafting either self-knowledge sample; the guide assumes Opus 5, while the session model here is Claude Fable 5.1 (claude-fable-5-1).
 - Skill applies it by: Read the target model from the raw request or default to the session model; substitute its display name and exact string from the model-notes.md pairing table, and record the substitution in assumptions.
@@ -739,7 +739,7 @@ Anchor: #model-self-knowledge
 ### BP-084 Model string sentence
 - Kind: sample-prompt
 - Rule: Use this wording to set the default model and its API string.
-- Guide says: "When an LLM is needed, please default to Claude Opus 5 unless the user requests otherwise. The exact model string for Claude Opus 5 is claude-opus-5." (see snippet model_string)
+- Guide says: "When an LLM is needed, please default to Claude Opus 5.5 unless the user requests otherwise. The exact model string for Claude Opus 5.5 is claude-opus-5-5." (see snippet model_string)
 - Measured on: all current (sample names Opus 5)
 - Applies when: System prompts for LLM-powered apps and coding assistants that generate SDK calls.
 - Skill applies it by: Graft into the authored system prompt with the target model substituted; keep both halves (the default and the exact string) because the model otherwise guesses ids.
@@ -748,7 +748,7 @@ Anchor: #model-self-knowledge
 ### BP-085 Exact string for Opus 5
 - Kind: fact
 - Rule: Use claude-opus-5 as the exact API model string for Claude Opus 5.
-- Guide says: "The exact model string for Claude Opus 5 is claude-opus-5."
+- Guide says: "The exact model string for Claude Opus 5.5 is claude-opus-5-5."
 - Measured on: Opus 5
 - Applies when: Generating API calls or SDK code that targets Opus 5; verifying model strings in user-pasted code.
 - Skill applies it by: Use claude-opus-5 for Opus 5 and claude-fable-5-1 for the session model; for other models look up the string in model-notes.md or the claude-api skill rather than inventing one.
@@ -756,7 +756,7 @@ Anchor: #model-self-knowledge
 ### BP-086 Default is overridable
 - Kind: technique
 - Rule: Make the default model overridable by explicit user request.
-- Guide says: "please default to Claude Opus 5 unless the user requests otherwise."
+- Guide says: "please default to Claude Opus 5.5 unless the user requests otherwise."
 - Measured on: all current
 - Applies when: Authoring default-model instructions for an application.
 - Skill applies it by: The default is phrased as a default, not a hard rule, so the assistant honors a user who names another model; <constraints> mirrors this when the task involves choosing a model.
@@ -1934,29 +1934,29 @@ Anchor: #leverage-thinking--interleaved-thinking-capabilities
 - Applies when: Deciding whether to script the model's reasoning in detail.
 - Skill applies it by: Rationale for the general-over-prescriptive conversion; execution does not force a scripted reasoning order.
 
-### BP-224 Thinking tags inside few-shot examples
+### BP-224 Worked examples shape thinking
 - Kind: technique
-- Rule: Include <thinking> tags inside few-shot examples to show the reasoning pattern; the model generalizes that style into its own thinking.
-- Guide says: "**Multishot examples work with thinking.** Use `<thinking>` tags inside your few-shot examples to show Claude the reasoning pattern. It will generalize that style to its own extended thinking blocks."
-- Measured on: all current with thinking on
+- Rule: Present each worked example as a problem, the method to apply, and the expected answer; worked examples shape how the model approaches similar problems inside its own thinking blocks.
+- Guide says: "**Multishot examples work with thinking.** Worked examples in your prompt shape how Claude approaches similar problems in its own thinking blocks. Present each example as a problem, the method to apply, and the expected answer."
+- Measured on: all current models with thinking on
 - Applies when: The rearticulated prompt includes <examples> and the reasoning path matters (classification with rationale, diagnosis, grading).
-- Skill applies it by: Template <examples> rule: when reasoning style matters, wrap the worked reasoning in <thinking> inside each <example>. examples/rearticulations.md carries one such <examples> block.
+- Skill applies it by: Template <examples> rule: each <example> carries the problem, the method, and the expected answer. The skill does not place <thinking> tags inside an example, because a prompt that asks a model to write out its reasoning may be declined on the models listed in BP-225. This entry reverses the guidance captured on 2026-09-08.
 
 ### BP-225 Manual CoT as a fallback
 - Kind: technique
-- Rule: When thinking is off, ask Claude to think through the problem step by step as a manual chain-of-thought fallback.
-- Guide says: "**Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem."
+- Rule: When thinking is off, ask the model to reason step by step before answering and to put the final answer in <answer> tags; on Fable 5.1, Fable 5, Opus 5.5, Opus 5 and Sonnet 5.5, rely on thinking instead, at a lower effort level when cost or latency matters.
+- Guide says: "**Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem before it answers, and to put the final answer in `<answer>` tags so you can extract it. On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, rely on thinking instead, at a lower [effort](https://platform.claude.com/docs/en/build-with-claude/effort) level if cost or latency matters: a prompt that asks the model to write out its reasoning, for example in `<thinking>` tags, may be declined."
 - Measured on: models running with thinking off (Opus 4.6 to 4.8, Sonnet 4.6 with thinking omitted; older models)
 - Applies when: The target model runs with thinking disabled. Not the session model.
-- Skill applies it by: Prompt authoring row only: add a step-by-step reasoning request when the target has thinking off. Never for Fable 5.1 or other always-on models; for Opus 5 prefer keeping thinking on at lower effort.
+- Skill applies it by: Prompt authoring row only, and only for a target whose thinking is off. On fable-5-1, fable-5, opus-5-5, opus-5 and sonnet-5-5 the skill recommends a lower effort level instead and writes no reasoning request, because such a prompt risks a reasoning_extraction decline.
 
 ### BP-226 Separate reasoning and answer with tags
 - Kind: technique
-- Rule: Separate manual reasoning from the final answer with structured tags such as <thinking> and <answer>.
-- Guide says: "Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output."
+- Rule: Have the model put the final answer in <answer> tags so the consumer can extract it; do not ask for <thinking> tags.
+- Guide says: "and to put the final answer in `<answer>` tags so you can extract it"
 - Measured on: models running with thinking off
 - Applies when: Applying the manual CoT fallback and the consumer needs to extract only the answer.
-- Skill applies it by: Prompt authoring row: pair the CoT request with an <output_format> instruction naming <thinking> and <answer> tags. Not used for the session model.
+- Skill applies it by: Prompt authoring row: pair the reasoning request with an <output_format> instruction naming <answer> only. The <thinking> half of this pairing was withdrawn by the guide; see BP-224 and BP-225.
 
 ### BP-227 Opus 5: keep thinking on at lower effort
 - Kind: model-note
@@ -2010,7 +2010,7 @@ Anchor: #leverage-thinking--interleaved-thinking-capabilities
 ### BP-233 Remove, do not rewrite, when migrating to Opus 5
 - Kind: migration
 - Rule: When migrating a prompt to Claude Opus 5, remove verification instructions rather than rewriting them.
-- Guide says: "When migrating to Claude Opus 5, remove these instructions rather than rewriting them. See [Task scope and over-verification](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#task-scope-and-over-verification)."
+- Guide says: "On Claude Opus 5, remove these instructions rather than rewriting them. See [Task scope and over-verification](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#task-scope-and-over-verification)."
 - Measured on: Opus 5
 - Applies when: A pasted prompt tuned for an earlier model is being retargeted to Opus 5.
 - Skill applies it by: Opus 5 migration list in model-notes.md: delete verification instructions outright; state the removal in assumptions.
@@ -3228,7 +3228,9 @@ The guide defers to one prompting page per current model family. The rules from 
 |---|---|---|---|
 | `references/models/fable-5-1.md` | Prompting Claude Fable 5.1, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1 | F51- | 152 |
 | `references/models/fable-5.md` | Prompting Claude Fable 5, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5 | F5- | 73 |
+| `references/models/opus-5-5.md` | Prompting Claude Opus 5.5, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5 | `O55-` | 74 |
 | `references/models/opus-5.md` | Prompting Claude Opus 5, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5 | O5- | 69 |
+| `references/models/sonnet-5-5.md` | Prompting Claude Sonnet 5.5, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5 | `S55-` | 91 |
 | `references/models/sonnet-5.md` | Prompting Claude Sonnet 5, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5 | S5- | 77 |
 | `references/models/opus-4-8.md` | Prompting Claude Opus 4.8, https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8 | O48- | 79 |
 | `references/models/legacy-4x.md` | none; built from the guide's inline mentions of Opus 4.7, Opus 4.6, Opus 4.5, Sonnet 4.6, Sonnet 4.5, Haiku 4.5, and Mythos Preview | BP- (the per-model lists in the profile's section 3) | n/a |
@@ -3242,7 +3244,7 @@ One row per guide rule. The hook is the place in SKILL.md that applies the rule:
 | ID | Heading | SKILL.md hook |
 |---|---|---|
 | BP-001 | Source citation | References (sources line); header of this file and snippet-library.md |
-| BP-002 | The eleven covered models | Step 1 |
+| BP-002 | The thirteen covered models | Step 1 |
 | BP-003 | Model guidance first | Step 1 |
 | BP-004 | Five technique families | reference only (section structure of this file) |
 | BP-005 | Migration section scope | Step 1; Step 4 |

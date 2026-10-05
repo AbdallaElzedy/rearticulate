@@ -7,7 +7,7 @@ How to read this file. Everything on the page is measured on Claude Sonnet 5; a 
 ## Identity and API facts
 
 - Profile: `sonnet-5`. Aliases: sonnet-5, sonnet5, claude-sonnet-5. API string: `claude-sonnet-5` (alias table in `references/model-notes.md`; the page does not print the string).
-- Covered set: inside the guide's eleven current models (BP-002); the guide's model table row is BP-016.
+- Covered set: inside the guide's thirteen current models (BP-002); the guide's model table row is BP-016.
 - Baseline: none with its own page. Page basis: "It performs well out of the box on existing Claude Sonnet 4.6 prompts." (S5-04). The Sonnet 4.6 facts this page prints are the migration reference: effort default `high` on both (S5-11); requests without a `thinking` field ran without thinking on 4.6 and run with adaptive thinking on 5 (S5-24); `budget_tokens` was deprecated on 4.6 and is removed on 5 (S5-31); non-default `temperature`, `top_p`, `top_k` return 400 on 5, a constraint "new for Sonnet-class models" (S5-49), so 4.6 still accepts them; the effort mapping is one step down (S5-18). Sonnet 4.6 itself lives in `references/models/legacy-4x.md`. Texts this page shares verbatim with the Opus 4.8 page are one snippet-library entry with both IDs as aliases and "Measured on: Sonnet 5, Opus 4.8" (see section 7).
 - Thinking: adaptive thinking on by default; a request without a `thinking` field runs with adaptive thinking (S5-23, S5-24, BP-218). Disable with `thinking: {type: "disabled"}` (S5-25); the page prints no effort cap on disabling (contrast Opus 5). With thinking disabled the model is less likely to reach for tools or consider searching (S5-36). Migrating a no-thinking 4.6 workload: try thinking on at lower effort instead (S5-27).
 - `budget_tokens`: manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) "is not supported on Claude Sonnet 5 and returns a 400 error" (S5-31, BP-189, BP-362). Replace with adaptive thinking plus the effort parameter.
@@ -595,7 +595,7 @@ Guide rules naming Sonnet 5 (from Prompting best practices; catalog IDs, quoted 
 
 ### BP-002 Sonnet 5 is inside the guide's covered set
 - Kind: fact
-- Rule: Treat the guide as authoritative for exactly these eleven current models and route any other model to the migration considerations.
+- Rule: Treat the guide as authoritative for exactly these thirteen current models and route any other model to the migration considerations.
 - Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
 - Applies when: Resolving whether guide techniques are measured on the target.
 - Skill applies it by: Sonnet 5 needs no analogy note; the guide applies directly.

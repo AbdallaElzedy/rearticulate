@@ -9,7 +9,7 @@ Relation to the Sonnet 5 profile. The two pages share most of their section shap
 ## Identity and API facts
 
 - Profile: `opus-4-8`. Aliases: opus-4.8, opus48, opus-4-8, claude-opus-4-8. API string: `claude-opus-4-8`, the model the guide's adaptive-thinking migration example targets (BP-213), with `max_tokens` pinned in the same example (BP-212).
-- Covered set: inside the guide's eleven current models (BP-002); the guide's model table row is BP-018 and its page link is BP-023.
+- Covered set: inside the guide's thirteen current models (BP-002); the guide's model table row is BP-018 and its page link is BP-023.
 - Baseline: `opus-4-7`, which has no page of its own and lives in `references/models/legacy-4x.md`. Page basis: "It performs well out of the box on existing Claude Opus 4.7 prompts." (O48-04). A working Opus 4.7 prompt is therefore kept and only the eleven delta topics of this page are applied: verbosity, effort and thinking depth, tool triggering, progress updates, literalism, tone, subagents, design and frontend, interactive coding, code review, computer use. Opus 4.8 is in turn the baseline of `opus-5` ("It performs well out of the box on existing Claude Opus 4.8 prompts.", O5-05), so Opus 5 borrows this page's review-coverage, frontend, literalism, and effort-sweep texts and records them as measured here.
 - Documented strengths: "long-horizon agentic work, knowledge work, vision, and memory tasks" (O48-03). A long agentic, vision, or memory request can lean on the model's autonomy instead of heavy step-by-step scaffolding.
 - Thinking: off unless the caller explicitly sets `thinking: {type: "adaptive"}` (O48-23, BP-217). This is the sharpest difference from Opus 5 and Sonnet 5, where thinking is on when the parameter is omitted (BP-218). Adaptive triggering is steerable: large or complex system prompts make it fire more often, and o48_thinking_steer damps it (O48-24, O48-26); measure quality after adding it. Mechanics: adaptive thinking, https://platform.claude.com/docs/en/build-with-claude/thinking (O48-25). When a caller keeps thinking off and the task needs reasoning, the guide's manual chain-of-thought fallback applies (BP-225).
@@ -616,7 +616,7 @@ Guide rules naming Opus 4.8 or its generation (from Prompting best practices; ca
 
 ### BP-002 Opus 4.8 is inside the guide's covered set
 - Kind: fact
-- Rule: Treat the guide as authoritative for exactly these eleven current models and route any other model to the migration considerations.
+- Rule: Treat the guide as authoritative for exactly these thirteen current models and route any other model to the migration considerations.
 - Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
 - Applies when: Resolving whether guide techniques are measured on the target.
 - Skill applies it by: Opus 4.8 needs no analogy note; the guide applies directly. Opus 4.7 and 4.6 are also in the set but have no page, so they use this profile by analogy (`references/models/legacy-4x.md`).
@@ -682,7 +682,7 @@ Guide rules naming Opus 4.8 or its generation (from Prompting best practices; ca
 - Rule: When thinking is off, ask the model to think through the problem step by step as a manual chain-of-thought fallback.
 - Guide says: "**Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem."
 - Applies when: An authored prompt for Opus 4.8 that will run with thinking left off, typically because the caller cannot change the configuration.
-- Skill applies it by: Prompt-authoring rows only: adds a step-by-step reasoning request with `<thinking>` and `<answer>` tags when the target runs with thinking off. The first choice is still to have the caller set `thinking: {type: "adaptive"}` (O48-23) or to raise effort (O48-20).
+- Skill applies it by: Prompt-authoring rows only: adds a step-by-step reasoning request with the final answer in `<answer>` tags when the target runs with thinking off. The first choice is still to have the caller set `thinking: {type: "adaptive"}` (O48-23) or to raise effort (O48-20).
 
 ## When this is the TARGET model: add to the rearticulated prompt
 

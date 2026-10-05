@@ -87,7 +87,7 @@ Questions get different treatment from instructions. "Can you suggest improvemen
 
 Prompting advice is measured on particular models, and the measurements disagree.
 
-Opus 5 checks its own work, so telling it to verify buys a redundant pass. Sonnet 5 reads instructions literally and does not stretch a rule from one case to the next, so a rule meant to apply widely needs its scope written out. Sonnet 5 also rejects a non-default `temperature` with a 400, and its tokenizer produces roughly 30 percent more tokens for the same text, so an inherited `max_tokens` can truncate. Fable 5 can decline a request that asks it to narrate its reasoning.
+Opus 5 checks its own work, so telling it to verify buys a redundant pass. Opus 5.5, six weeks younger, dropped its default effort from high to medium and stopped accepting a request that switches thinking off, so a setting carried across from Opus 5 costs more than it did. Sonnet 5 reads instructions literally and does not stretch a rule from one case to the next, so a rule meant to apply widely needs its scope written out. Sonnet 5 also rejects a non-default `temperature` with a 400, and its tokenizer produces roughly 30 percent more tokens for the same text, so an inherited `max_tokens` can truncate. Fable 5 can decline a request that asks it to narrate its reasoning.
 
 A skill that flattened those differences would hand the same prompt to each of them. Here is what changes when one request is retargeted:
 
@@ -121,7 +121,9 @@ A model mentioned in passing does not switch anything. "Fix the test that Sonnet
 |---|---|
 | `fable-5-1` | Fable 5.1, Mythos 5.1 |
 | `fable-5` | Fable 5, Mythos 5 |
+| `opus-5-5` | Opus 5.5 |
 | `opus-5` | Opus 5 |
+| `sonnet-5-5` | Sonnet 5.5 |
 | `sonnet-5` | Sonnet 5 |
 | `opus-4-8` | Opus 4.8 |
 | `legacy-4x` | Opus 4.7, 4.6, 4.5, Sonnet 4.6, 4.5, Haiku 4.5, Mythos Preview, by analogy with the closest page |
@@ -161,14 +163,14 @@ To scope it to one repository, clone into that repository's `.claude/skills/` di
 
 | Flag | Effect |
 |---|---|
-| `--model <alias>` | Writes the prompt for the named model rather than the session model. Takes `fable-5-1`, `fable-5`, `opus-5`, `sonnet-5`, `opus-4-8`, the 4.x names, and their `claude-` forms. |
+| `--model <alias>` | Writes the prompt for the named model rather than the session model. Takes `fable-5-1`, `fable-5`, `opus-5-5`, `opus-5`, `sonnet-5-5`, `sonnet-5`, `opus-4-8`, the 4.x names, and their `claude-` forms. |
 | `--dry-run` | Stops after the prompt, with collapsed blocks printed in full so you can take them elsewhere. Replying "run it" executes what was shown. |
 
 Phrasing reaches the same place. "Just rewrite the prompt" or "show me the prompt" reads as a dry run, while a prohibition inside the task, such as "build it but hold off on the tests", stays part of the task.
 
 ## What it knows, and when it reads it
 
-`SKILL.md` is 130 lines. The other 12,000 wait until a run reaches for them.
+`SKILL.md` is 137 lines. The other 13,900 wait until a run reaches for them.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="diagrams/context-dark.svg">
@@ -181,31 +183,33 @@ Rule identifiers run through the whole set. `BP-nnn` points into the main guide 
 
 ### Sources
 
-Six pages of Anthropic's documentation, captured on 8 September 2026.
+Eight pages of Anthropic's documentation. The six originals were captured on 8 September 2026; the main guide and the two 5.5 pages were re-captured on 5 October 2026, after Claude Opus 5.5 was released on 22 September.
 
 - [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 - [Prompting Claude Fable 5.1](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1)
 - [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5)
+- [Prompting Claude Opus 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)
 - [Prompting Claude Opus 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)
+- [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5)
 - [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5)
 - [Prompting Claude Opus 4.8](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8)
 
 Quoted blocks keep the published wording and punctuation, including the capitalised emphasis a few of them use. A snippet that gets pasted into a prompt should match the text that was measured, not a tidied version of it.
 
-Model behaviour moves between releases. The capture date above is the moment these notes describe, so check the current pages before leaning on a claim about a specific model.
+Model behaviour moves between releases, and this repository has already seen it happen. Between the two captures the guide withdrew its advice to put `<thinking>` tags inside worked examples, because a prompt asking a model to write out its reasoning can now be declined on five of the covered models. The skill was updated to match. Check the current pages before leaning on a claim about a specific model.
 
 ## Repository layout
 
 | Path | Lines | Contents |
 |---|---|---|
-| `SKILL.md` | 130 | The procedure, the model delta table, and the rules that stay in force for the session |
-| `references/technique-catalog.md` | 3610 | The rules from the main guide, each with its quote, the situation it applies to, and the step that uses it |
-| `references/snippet-library.md` | 1303 | Sample prompts reproduced as published, with notes on which profiles should receive them |
-| `references/models/` | 5181 | One file per profile: identity facts, behavioural entries, what to add, what to take out |
-| `references/model-notes.md` | 233 | The router. Aliases, the baseline chain between models, cross-model API facts |
-| `references/request-taxonomy.md` | 326 | Request types, the signals that select one, and the conversion list for weak phrasing |
-| `templates/rearticulated-prompt.md` | 370 | Tag order, per-tag rules, model overlays, default blocks |
-| `examples/rearticulations.md` | 877 | Nine worked rewrites, from a one-line bug fix through a long migration |
+| `SKILL.md` | 137 | The procedure, the model delta table, and the rules that stay in force for the session |
+| `references/technique-catalog.md` | 3612 | The rules from the main guide, each with its quote, the situation it applies to, and the step that uses it |
+| `references/snippet-library.md` | 1498 | Sample prompts reproduced as published, with notes on which profiles should receive them |
+| `references/models/` | 6653 | One file per profile, eight of them: identity facts, behavioural entries, what to add, what to take out |
+| `references/model-notes.md` | 255 | The router. Aliases, the baseline chain between models, cross-model API facts |
+| `references/request-taxonomy.md` | 377 | Request types, the signals that select one, and the conversion list for weak phrasing |
+| `templates/rearticulated-prompt.md` | 396 | Tag order, per-tag rules, model overlays, default blocks |
+| `examples/rearticulations.md` | 879 | Nine worked rewrites, from a one-line bug fix through a long migration |
 
 ## Scope and known gaps
 

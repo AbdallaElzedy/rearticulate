@@ -874,4 +874,6 @@ skill's own narration and Step 7 (F51-37, F51-43).
 - Emphatic tool directive in a pasted prompt (Tool usage, BP-162, BP-163): "CRITICAL: You MUST use this tool when..."
   -> "Use this tool when...". Note the softening in the assumptions.
 - Reasoning pattern that matters (Leverage thinking, BP-224): for classification, grading or diagnosis, each <example>
-  carries a <thinking> block with the worked reasoning before the answer.
+  states the problem, the method to apply, and the expected answer. The worked reasoning does not go in a <thinking>
+  block inside the example: on fable-5-1, fable-5, opus-5-5, opus-5 and sonnet-5-5 a prompt that asks the model to write
+  its reasoning out may be declined under the reasoning_extraction category (BP-225).

@@ -10,7 +10,7 @@ Baseline: none (guide only). Page basis: "Claude Fable 5 has several behavioral 
 
 - Profile: `fable-5`. Aliases: fable-5, fable5, mythos-5, mythos5, claude-fable-5, claude-mythos-5. Display names: Claude Fable 5, Claude Mythos 5.
 - API model string: not printed on this page or in the guide's samples. Look it up in the models overview, https://platform.claude.com/docs/en/models/overview, or the `claude-api` skill rather than inventing one; the guide's samples pin an explicit model string and `max_tokens` whenever API code is produced (BP-059).
-- Covered set: inside the guide's eleven current models (BP-002); the guide's model table row is BP-015, and the page link is BP-020.
+- Covered set: inside the guide's thirteen current models (BP-002); the guide's model table row is BP-015, and the page link is BP-020.
 - Capabilities, API changes, pricing, and availability: Introducing Claude Fable 5 and Claude Mythos 5, https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5 (F5-02, BP-009). The skill names that page instead of restating its content.
 - Thinking: always on, and adaptive thinking is the only mode; there is no way to disable it and no extended thinking budget (F5-08, BP-195, BP-220). Thinking output is summarized only (F5-08). Nothing in a rearticulated prompt configures thinking on this profile.
 - `budget_tokens`: not supported. No extended thinking budgets exist on the Fable family (F5-08), and on Claude 4.7 and later the parameter returns a 400 error (BP-189). Convert a legacy configuration to adaptive thinking plus `output_config.effort` and record the substitution.
@@ -581,7 +581,7 @@ Guide rules naming Fable 5 and Mythos 5 (from Prompting best practices; catalog 
 
 ### BP-002 Fable 5 and Mythos 5 are inside the guide's covered set
 - Kind: fact
-- Rule: Treat the guide as authoritative for exactly these eleven current models and route any other model to the migration considerations.
+- Rule: Treat the guide as authoritative for exactly these thirteen current models and route any other model to the migration considerations.
 - Guide says: "This is the reference for prompt engineering with current Claude models, including Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 4.5."
 - Applies when: Resolving whether guide techniques are measured on the target.
 - Skill applies it by: Fable 5 and Mythos 5 need no analogy note; the guide applies directly.
